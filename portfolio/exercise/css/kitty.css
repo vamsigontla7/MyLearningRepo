@@ -1,0 +1,22 @@
+body {
+    font-family: 'Ravi Prakash', cursive;
+    color: #747704;
+    font-weight: 900;
+}
+
+.text-muted {
+    color: #BCBBBB;
+}
+
+.text-thin {
+    font-weight: 1;
+}
+
+.title-logo{
+    margin-top: 20px;
+}
+
+.title-super{
+    margin-top: 40px;
+    font-size: 60px;
+}

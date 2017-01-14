@@ -1,0 +1,218 @@
+MEAN Stack with REST API
+-	mongo:	shell
+	mongod: Mongo DB server
+-	Mongo DB stores objects as 	BSON, which is a short for Binary JSON
+-	npm is a command line interface program to manage node.js libraries (it stands for node package manager )
+-	Mongo DB's standard document size is 16 mega byte
+-	Node JS is server side java script runtime environment.
+-	When starting a new NodeJS application, first thing we need to do is to create a package.json file, 
+	this describes your app meta data, including name, version, author and any npm package that is depend on.
+-	Once there is a package.json file we need to run "npm install", to install the dependency/packages .
+-	Note that each NodeJS project has its own node underscore modules directory where npm install packages.
+-	Mongoose is an Object Document Mapper(ODM) that provides functinality like schema validation on top of Mongo DB node.js driver.
+-	Add MongoDB dependency to package.json to connect MongoDB and Node.js
+-	Every time update package.json to install a new type of dependency.
+	{
+		"dependencies": {
+			"mongodb": "~2.2"	// Adding "~" value, updates to latest version. But recommended use exact version to avoid potential breaks.
+		}
+	}
+-	In JS, we dont write code that calls a function and expects to receive a return value. Instead, we pass a callback to most functions as one of the parameters.
+	So that function will execute this callback as the last step. 
+	The callback function has two paramaters, an error and a db handle. Most of the node js call backs have the same form
+	If operation fails the callback gets an error as first argument.
+	If operation succeeds, the callback gets null as first argument and the result of the operation as the second argument.
+--->>>	Node.js concurrency and event loop fundamentals
+-	A code that executes in the current iteration of the event loop and thus blocks the event loop is known as Synchronous code.
+	Where as code registers an event handler and thus doesn't block the event loop is known as asynchronous code.
+		setTimeout(function() {
+				console.log('Synchronous Code Block');
+			}
+		), 0);
+		console.log('Asynchronous Code Block');
+-	In node.js file i/o and network i/o are asynchronous
+-	The "require" function is node js mechanism for breaking up large projects into small manageable files.
+	it lets to include external modules and other files in a clean and elegant way.
+-	Node js uses file level scoping. i.e., by default any variable or function declared in a file is not accessible outside of that file.
+	So "require" function is a preferred way to share the code between files instead using global object.
+-	when we call "require" on a directory NodeJS looks for an index.js in that directory and uses that file.
+-	module.exports	-	to assign and return a value
+	exports.other	-	only assign a property
+-	Mocha is popular testing framework for Node.js and also useful for testing client side java script
+	https://courses.edx.org/courses/course-v1:MongoDBx+M101x+2T2016/courseware/4cf555e7a26d4fbb87503adf07ef03ce/b43fb89d58c54858a1e5606c3669096a/?child=first
+	   describe('my feature', function() {
+			it('works', function() {});
+			it('fails gracefully', function() {});
+		});
+		describe('my other feature', function() {
+			it('sorta works', function() {});
+		});
+--->>>
+-	npm help : gives list of all the things we can do with npm
+--->>>
+-	Gulp, tool that enables you to watch set of files and automatically re run your tests whenever a file changes.
+-	By default, packages gulp tasks are listed in a file called gulfile.js
+---->>>> MONGO DB SCHEMA DESIGN
+-	Stripe API:	Stripe is a popular service for payment processing.
+-	There will be no page reloads in this application. AngularJS will be responsible for routing between the different views in your application.
+	The AngularJS client will communicate with the Node.js server using JavaScript Object Notation, or JSON, over HTTP.
+-	In this application, the Node.js server will be primarily responsible for validating the client's data, authentication, and payment processing.
+-	Node js server will serve as a validation and business logic layer on top of MongoDB.
+-	Mongoose is an Object Document Mapper for MongoDB and NodeJS
+-	Mongoose's API consists of four primary data types.
+	a SCHEMA is a set of rules that defines what fields a document may have and what properties the document must satisfy to be considered valid.
+	a CONNECTION is an object representing one or more sockets that are connected to the MongoDB.
+	a MODEL is a combination of a schema and a connection. 
+		A model is a wrapper around a single MongoDB collection. 
+		It uses associated schema to make sure documents inserted into the collection satisfy the schema's constraints.
+	a DOCUMENT is a single object from a collection. It has an associated model and a dot save function that can be used to persist that document to MongoDB.
+-->	SCHEMA DESIGN PRINCIPLE
+	STORE WHAT YOU QUERY FOR
+	PRINCIPLE OF LEAST CARDINALITY	(helps to resolve one to many and many to many relationships in mongo db)
+-->	Mongo DN Indexes
+-	Indexes ae key to getting good performance from mongo db.
+-	So when there are no indexes and you run a query, MongoDB will do a collection scan to find documents that match the query.
+	That is, MongoDB will search every single document in the collection to find documents that match the query.
+-	db.users.createIndex({name: 1});
+-	Mongo DB also has a MULTI KEY INDEXES.
+-	A multikey index is an index that keeps track of values in an array.
+-	Fields are optional by default in mongoose, unless we specify it as required.
+-	Thus your application can use PROJECTIONS to make sure publicly facing code doesn't show a user's cart or oauth ID.
+-->	ADVANCED MONGOOSE FEATURES: VIRTUALS
+-	Virtuals are properties that are typically computed from other properties. They are not persisted to the database, but they can be accessed just like any other property.
+-	The toObject and toJSON functions are Mongoose's methods for converting a Mongoose document into a plain old JavaScript object.
+-	The difference between these two functions is that JavaScript's built in JSON.stringify, function which converts a JavaScript object into JSON string,
+	first looks for a toJSON function on the object and then uses that output.
+-	By default, toObject and toJSON do not include virtuals. But if you set this virtual true property on toObject and toJSON, 
+	your schema will be configured to include virtuals in the toObject and toJSON outputs.
+-->	Advanced mongoose features: custom setters + sorting by currency
+-	Verb
+	resource
+	body
+-	The npm package you will be using to start an HTTP server is called Express.
+-	Most popular Nodejs web server and web application framework.
+-	Express is fast, flexible, and highly customizable.
+-	An Express route handler, like this function, takes two parameters.
+	req
+	res
+-	The req object includes information about the incoming request and the res object includes utilities for crafting a response.
+-	node index.js
+	"http://localhost:3000/									-		Hello World
+	"http://localhost:3000/user/vamsy?option=test"			-		Page for user vamsy with option test
+	The colon in this route delimits a so-called route parameter.
+	The query string is effectively everything that comes after the question mark in the URL.
+-	 SUPERAGENT module is a popular node.js HTTP client. You can use superagent to make HTTP requests.
+-->	DEPENDENCY INJECTION IN NODEJS + EXPRESSJS
+-	The general idea of dependency injection is to separate initialization code from business logic.
+-	When you're calling this function in your code as well as in your test, adding parameters quickly becomes cumbersome.
+	This is why typically you'll use a framework to handle dependency injection for you, called WAGNER.
+	WAGNER has a rich feature set that goes well beyond dependency injection. (Dependency Injector)
+-	Wagner lets you register named factories which are functions that return values. These values are known as services.
+-	Route handlers(ex: get) and API end points()
+-	the bind function is a powerful JavaScript tool for reusing code.
+-->	USER AND CART APIS
+-	Mongoose has this very handy POPULATE function, that superficially behaves like an SQL join operation.
+-->	Integrating Facebook OAuth
+-	To enable Facebook authentication, you're going to add three new packages to package.json.
+	express-session:	It defines an express middleware. This particular middleware handles session storage or identifying a logged in user based on a cookie.
+	passport and passport-facebook:
+		By default, passport only supports conventional username and password authentication.
+		So the passport Facebook module enables passport to handle Facebook login.
+-->	INTEGRATING STRIPE FOR PAYMENTS
+-	STRIPE is a new route that enables a user to pay for these items and is also a popular developer friendly payment processor.
+-->	INTEGRATING MONGODB TEXT SEARCH
+-	MongoDB server version 2.6 introduced full text search.
+-	To use MongoDB text search, you need to create a text index. 
+	MongoDB won't allow you to use text search without a text index.
+	Create a index on a schema 	//	schema.index({name: 'text'});
+-	Once you have a text index on name, you could use MongoDB text search with Mongoose.
+		Product.
+        find(
+          { $text : { $search : req.params.query } },
+          { score : { $meta: 'textScore' } }).
+        sort({ score: { $meta : 'textScore' } }).
+        limit(10).
+        exec(handleMany.bind(null, 'products', res));
+-	There's also a projection that uses this strange $meta thing.
+	The reason for this is so the API can sort the documents by the text score.
+	The text score is a number that says how well the document matches the given text query.
+-	Documents that are more relevant have a higher text score, 
+	so this $meta projection and then this sort by 
+			$meta textScore enables you to sort by most relevant documents first.
+-->	INTEGRATING OPENEXCHANGERATES
+-	OPEN EXCHANGE RATES API that enables you to get hourly currency exchange rates.
+--->>>	ANGULAR JS
+-	The most fundamental feature of AngularJS, which is two way data binding.
+	Two way data binding ties the state of a JavaScript variable.
+-	Now note that you don't use JavaScript to manipulate your HTML at all.
+	Two way data binding takes care of keeping the state of the page in sync with the state of your JavaScript variables.	
+-	This HTML loads AngularJS the file from a CONTENT DELIVERY NETWORK, or CDN for short using this script tag.
+-	A CDN optimized server enables you to load static assets, like JavaScript files or images over HTTP fast.
+-	In a single page app/SPA, your browser loads a single page and then switches between different views.
+-->	FRAGMENT IDENTIFIER
+-	The part after the first hashtag is known as the FRAGMENT IDENTIFIER.
+	When the fragment identifier changes, the browser doesn't contact the server.
+	So when you clicked on the About link, the page changed without reloading the page or without contacting the server.
+-	A single page app is a standalone client program. It interacts with your server via your rest API entirely,
+-	so your server is just responsible for setting JSON and managing state.
+	In other words, your UI and UX are completely independent of your server.
+-	"app.config" function is that this is the function that you use to declare your routing information.
+-	Now there's two key differences between the express router and the AngularJS router.
+		First, note that you don't specify the HTTP verb, like get or post.
+		Secondly, the route handler in AngularJS is an options object rather than a function.
+			The most simple one is this template option, which lets you define the HTML that's rendered for that view as a string.
+			Ex:	<<<<	template: '<h1>Home Page</h1><a ng-href="#/about">About</a>' >>>>
+-	var app = angular.module('myApp', ['ng', 'ngRoute']);
+							('This is a ^^ng-app="myApp"^^ directive', ['These are list of dependencies of "myApp" module'])
+-	BROWSERIFY PACKAGE, compiles Node.js style JavaScript into a file that you can include in the browser.
+-	recompiling using Browserify from the command line every time is a pain. So Node.js developers typically automate this process using Gulp.
+-	GULP is a build system rather than test runner.
+-	BROWSERIFY lets you organize your JavaScript into multiple files in Node.js style, so you don't have to worry about script tags.
+	You only need to include one script tag for all of your browser side JavaScript.
+	"./bin/index.js"
+-->	DIRECTIVES AND CONTROLLERS
+-	Breaking up your code into directives leads to more cleaner and more modular code.
+-	ngCloak drective:	
+-	The de facto tool for launching browsers to test client-side JavaScript in the Node.js community is called KARMA
+-	KARMA enables you to test JavaScript code in live browsers running either around your local machine or in the cloud.
+-	
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+-->>>Facebook
+id:	1291414320910864
+key:	498517b265585b8d31d47e39ae117a70
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+-->>> STRIPE test credit card for payments
+Stripe.card.createToken({
+  number: '4242424242424242',
+  exp_month: 12,
+  exp_year: 2017,
+  cvc: '123'
+}, function(status, response) {
+  // response.id is the card token.
+});
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+--->>>>>> Set Up STRIPE API for payments
+// Set your secret key: remember to change this to your live secret key in production
+// See your keys here: https://dashboard.stripe.com/account/apikeys
+var stripe = require("stripe")("sk_test_ii77Tkal111yQHmhqSQuEhEZ");
+
+// Get the credit card details submitted by the form
+var token = request.body.stripeToken; // Using Express
+
+// Create a charge: this will charge the user's card
+var charge = stripe.charges.create({
+  amount: 1000, // Amount in cents
+  currency: "usd",
+  source: token,
+  description: "Example charge"
+}, function(err, charge) {
+  if (err && err.type === 'StripeCardError') {
+    // The card has been declined
+  }
+});
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+---->>>>>OPEN EXCHANGE RATES APP ID
+27d25d7c62434b1ba1cd462d24281b71 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
